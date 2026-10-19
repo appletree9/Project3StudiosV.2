@@ -1,3 +1,7 @@
+# V2.2.2 — deployment package
+
+Start with `START_HERE.txt`. Includes `.github/workflows/deploy.yml`, required-file checks, and local static deployment without a Jekyll build. Set Pages Source to GitHub Actions and disable duplicate publishing workflows in your repository. Local checks cannot validate your account runner availability or clear already queued runs. App behavior retains the V2.2.1 strength fixes.
+
 # V2.2.1 — Brush strength response
 
 Fixed Alpha Stamp ignoring the main Strength slider. Strength now multiplies its capped/accumulating height, while Intensity still controls alpha coverage. The sculpt strength curve preserves a gentle low range and increases the upper deformation range; the standard and worker editors both use it. Grab/Drag remain anchored to pointer movement with a continuous bounded pull response, without a flat upper slider range. Worker smoothing/flattening gains are bounded for stability.

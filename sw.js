@@ -1,5 +1,5 @@
 const CACHE_PREFIX='project3studios-v2:'+self.registration.scope+':';
-const CACHE=CACHE_PREFIX+'2.2.1-brush-strength';
+const CACHE=CACHE_PREFIX+'2.2.2-deployment';
 const CORE=['./engine/stamps.js','./vendor/three/examples/jsm/utils/TextureUtils.js','./vendor/three/build/three.module.js','./vendor/three/examples/jsm/loaders/GLTFLoader.js','./vendor/three/examples/jsm/loaders/OBJLoader.js','./vendor/three/examples/jsm/utils/BufferGeometryUtils.js','./vendor/three/examples/jsm/exporters/GLTFExporter.js','./engine/client.js','./engine/worker.js','./engine/sculpt.wasm','./','./index.html','./anatomy-assets.js?v=6','./manifest.webmanifest','./icon-180.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE.map(url=>new Request(url,{cache:'reload'})))).then(()=>self.skipWaiting()));
