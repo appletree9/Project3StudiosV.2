@@ -1,3 +1,5 @@
+Logo appearance update (still 2.2.3): removed the top logo button background and border in dark/light mode. The logo remains clickable and has a keyboard focus outline.
+
 # V2.2.3 — Stone interface defaults
 
 Dark: charcoal / warm gray / sandstone. Light: limestone / taupe / dark stone text. Both the main interface and worker workspace use neutral defaults. Custom appearance values are retained; the exact previous factory blue appearance is migrated to stone. Interface Style reset and the header accent reset return to the new defaults. Scene background, paint, and model material colors are unchanged. V1 settings and the V2.2.2 backup remain separate.
