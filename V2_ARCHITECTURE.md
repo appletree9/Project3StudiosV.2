@@ -19,7 +19,7 @@ The original viewport stops rendering while the performance workspace is open. D
 
 The worker processes a batch synchronously; then it recalculates normals and uploads the changed mesh. Its animation callback draws only when dirty. Input events can arrive between frame callbacks. Input batches are bounded at 128 samples; four buffers cap in-flight allocations/queued work. Overload drops samples rather than growing a queue forever. A stroke-end replaces the last pending sample if necessary. GPU resources are released by terminating the dedicated worker on exit. Context/device loss returns an error; reopening creates a fresh workspace.
 
-`engine/sculpt.cpp` is the complete C++ implementation. Setup builds a median-split vertex BVH with leaves of at most 16 vertices. A dab rejects sphere/AABB misses, edits only candidate leaves, then refits changed ancestors. Neither mesh storage nor BVH nodes allocate during dabs. BVH building and initial GPU allocation happen before ready. Fixed memory includes a full previous-stroke position snapshot.
+`engine/sculpt.cpp` is the complete C++ implementation. Setup builds a median-split vertex BVH with leaves of at most 16 vertices. A dab rejects sphere/AABB misses, edits only candidate leaves, then refits changed ancestors. Neither mesh storage nor BVH nodes allocate during dabs. BVH building and initial GPU allocation happen before ready. Fixed memory includes a full previous-stroke position snapshot, CSR vertex-neighbor arrays for Smooth/Polish, and frozen Drag influence weights.
 
 ## Parallel deformation implementation
 
@@ -76,3 +76,9 @@ Before production: measure input-to-visible latency and presented frames on actu
 
 - WebGPU specification: https://www.w3.org/TR/webgpu/
 - Emscripten pthreads and isolation: https://emscripten.org/docs/porting/pthreads.html
+
+## V2.0.4 brush additions
+
+The main editor and worker both expose eleven brushes. Grab retains its earlier incremental behavior; Drag uses separate frozen weights and a view-plane displacement. Crease combines tangential contraction with a normal cut, Scrape removes points above an offset plane, and Polish uses neighbor smoothing with most normal shrinkage removed. Smooth and Clay are also available in the worker. Smooth/Polish copy positions into a reusable Wasm scratch array before parallel candidate updates so neighbor reads do not race vertex writes.
+
+The main editor uses bounded, coalesced-input frame batches and skips full position snapshots for brushes without neighbor dependencies. Contact normals use normal matrices; raycasts refresh world matrices before intersecting. Main brush indicators are scene helpers; the worker uses a DOM overlay for the screen-space brush preview.

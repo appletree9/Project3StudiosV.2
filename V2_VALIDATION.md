@@ -1,36 +1,42 @@
-# V2.0.3 validation
+# V2.0.4 validation
 
-## Executed checks
+## Environment
 
-- Parsed all 19 executable inline scripts in index.html plus the service worker, anatomy asset script and both engine modules.
-- Rebuilt the delivered C++20 Wasm binary with Zig, SIMD and fixed 128 MiB memory. Inspected its exports and loaded the actual binary in Node.
-- `tests/wasm.cjs`: mesh setup, normals, local deformation, BVH ray-near-vertex picking, undo and capacity rejection.
-- `tests/grab.cjs`: frozen Grab baseline, mirror motion, centered symmetry seam, zero drift on returning to the origin, undo and BVH picking after bounds refit.
-- `tests/worker.cjs`: actual worker script/Wasm initialization and message protocol with a stub WebGL API. This check alone does not validate graphics.
-- Native pthread C++ test: 20 deformation strokes over 30,000 vertices matched a brute-force reference.
-- `tests/isolation.cjs`: separate V1/V2 theme/color/layout keys; V1 data preserved; V1 color changes do not alter V2 values; cache reads/deletion scoped to V2.
+Real Chromium 134 headless, ANGLE/SwiftShader software WebGL2, served over loopback HTTP. Core tests ran at 1440 × 1000 and 390 × 844 viewport sizes using mouse input. Phone-sized tests are not physical iPhone or touch/Apple Pencil tests. Public Three.js modules were served unchanged through a test request handler because direct browser networking was restricted. A test-only state hook is injected by the harness; it is absent from the delivered app.
 
-## Real browser execution
+## Verified
 
-Chromium 134 headless, software WebGL2/ANGLE/SwiftShader, at **1440 × 1000** and **390 × 844** viewport sizes. These tests used desktop mouse input at both widths, not physical touchscreen hardware. CDN module requests were supplied unchanged through a local test request handler because direct browser networking was restricted. A test-only module hook exposes state to assertions; the shipped index.html has no such hook.
+- Complete initialization and JavaScript parsing: all 19 executable inline scripts, engine modules, service worker and anatomy asset script.
+- Eleven distinct main brushes: Inflate, Carve, Clay, Smooth, Flatten, Pinch, original Grab, new Drag, Crease, Scrape and Polish. Real canvas drags changed finite vertex data.
+- Drag continues beyond the original surface, returns without cumulative drift, and undoes. It is separate from Grab.
+- Switching from Paint/Move to Drag selects sculpt mode and disables competing handlers. The brush contact ring becomes visible on the model.
+- Real worker WebGL2/VAO initialization, Drag input and Apply back to the editor.
+- All 23 built-in shape factories produce finite vertex positions and valid indices.
+- Scene snapshot/restore, duplicate/remove, theme, background, material color/Matcap, perspective/orthographic projection, move snapping and five light types.
+- Vertex painting, OBJ export, native .p3sculpt save/reopen and basic rig create/close.
+- Neighbor-cache rebuild when geometry/topology changes.
+- C++20 Wasm rebuilt with SIMD and fixed 128 MiB memory. Native Wasm fixtures verify all ten dab tools, finite geometry, undo and capacity checks. Drag has a separate mirrored movement/center seam/zero-drift/BVH refit test.
+- Native persistent-pthread deformation matches brute force across 20 strokes / 30,000 vertices.
+- V1/V2 storage isolation and scope-only offline cache ownership remain tested.
 
-Passed at both sizes:
+The core desktop and phone-sized browser runs completed without page or console errors. Additional desktop checks passed for PNG output (valid PNG signature), STL output, resolution-16 voxel remeshing, and a two-second 640 × 360 WebM turntable video. The final extended desktop suite also completed without page or console errors, including malformed-project rejection without scene changes. The video returned a nonempty download; software rendering skipped frame intervals, so this is not a frame-rate guarantee.
 
-- Full editor initialization with no page errors or console errors.
-- Selecting Grab after Paint and Move disables painting/transforms and selects sculpt mode.
-- Main Grab deforms vertices, continues beyond the original surface, returns without accumulated drift, and undoes correctly.
-- Actual canvas strokes for Inflate, Carve, Clay, Smooth, Flatten and Pinch change mesh vertices and remain finite.
-- Worker workspace loads through real WebGL2/VAO, accepts Grab strokes and applies changed geometry back to the editor.
-- Scene snapshot/restore completes.
-- All **23 built-in shape factories**, including the anatomy assets, produce finite positions and indices within the vertex range.
+A preliminary 0.3-second video test returned an empty-video error, which the app reported. Two-second WebM recording passed. Very short clips and other encoder combinations remain device/codec-dependent.
+
+## Limits
+
+These tests do not prove every feature is bug-free or that every device sustains 60/120 FPS. Real WebGPU, Safari/iPadOS, physical touch/Apple Pencil, mobile thermal/memory behavior, PWA installation/update and Emscripten pthread glue in browsers remain unverified. Complex rigging/animation, arbitrary imported files and every layout combination are not exhaustive tests.
+
+GLB export verification was blocked by a timed-out download of the Three.js GLTFExporter dependency in the test environment. The export code remains present; successful GLB output is not claimed for this run. Set `P3_TEST_GLB=1` when that dependency is reachable to include it in the browser suite.
 
 ## Reproduce
 
-From this extracted package directory:
+From the extracted package directory:
 
 ```sh
 node tests/wasm.cjs
-node tests/grab.cjs
+node tests/brushes.cjs
+node tests/drag.cjs
 node tests/worker.cjs
 node tests/isolation.cjs
 g++ -std=c++20 -O3 -pthread tests/threaded.cpp -o /tmp/p3-thread-test
@@ -41,8 +47,4 @@ python tests/browser.py
 P3_PHONE_VIEWPORT=1 python tests/browser.py
 ```
 
-The browser harness serves the app itself on a temporary loopback port and needs network access to retrieve Three.js modules if they are not already in its temporary cache. It hides floating panels during canvas-drag assertions so controls cannot cover the test coordinates. It validates engine behavior, not every layout permutation.
-
-## Remaining limits
-
-These checks do not certify every application feature as bug-free. Real WebGPU rendering, Apple Pencil/touch pressure and cancellation, iPhone/iPad Safari, thermal/memory behavior, actual 60/120 Hz presentation, PWA installation/update on devices, and the Emscripten pthread browser build are unverified. Exports, rigging, movie editing and all possible imported files were not exhaustively exercised. Existing historical TEST_RESULTS files came from the original upload and are not new test results.
+The browser harness serves the app on a temporary loopback port, retrieves public modules when its temporary cache lacks them, and hides floating panels for canvas-drag assertions. Existing historical TEST_RESULTS files came with the original upload and are not new validation evidence.

@@ -1,0 +1,26 @@
+PICK {'x': 720, 'y': 575.9016208857959} 
+PASS main Drag: deformation, off-surface continuation, return without drift, undo; transform deselection
+PASS brush inflate 0.009936
+PASS brush carve 0.009938
+PASS brush clay 0.009924
+PASS brush smooth 0.000523
+PASS brush flatten 0.001127
+PASS brush pinch 0.003064
+PASS brush grab 0.029087
+PASS brush crease 0.005503
+PASS brush scrape 0.003146
+PASS brush polish 8.3e-05
+WORKER WebGL2 / VAO · 6,050 vertices · Ready
+PASS worker Drag + apply 0.23923435807228097
+PASS scene snapshot/restore
+SHAPES [{"name": "Sphere", "vertices": 6050}, {"name": "Cube", "vertices": 7778}, {"name": "Cylinder", "vertices": 3938}, {"name": "Cone", "vertices": 4802}, {"name": "Torus", "vertices": 6144}, {"name": "Capsule", "vertices": 5122}, {"name": "Plane", "vertices": 13442}, {"name": "Knot", "vertices": 8192}, {"name": "Icosa", "vertices": 362}, {"name": "Anatomical Head", "vertices": 69269}, {"name": "Body", "vertices": 6210}, {"name": "Torso", "vertices": 6210}, {"name": "Female Body", "vertices": 54582}, {"name": "Male Body", "vertices": 54582}, {"name": "Human Head", "vertices": 69269}, {"name": "Female Head", "vertices": 69318}, {"name": "Male Head", "vertices": 69269}, {"name": "Egg", "vertices": 5042}, {"name": "Pyramid", "vertices": 1026}, {"name": "Prism", "vertices": 1538}, {"name": "Octahedron", "vertices": 1026}, {"name": "Dodecahedron", "vertices": 4610}, {"name": "Rounded Cube", "vertices": 9602}]
+PASS duplicate/remove, theme, background, material/Matcap, projection, snapping, five light types, adjacency refresh after topology change
+PAINT_STATE {'tool': 'polish', 'transformTool': 'none', 'stroke': False, 'paintActive': True, 'objects': 1} {'x': 915.2743502445744, 'y': 516.0538071465962} {'hit': {'object': 'Sphere 1', 'selected': True}, 'element': ''}
+PASS malformed project rejected without changing the scene
+PASS painting, OBJ export, native project save/reopen, basic rig create/close
+PASS export stl 604884
+PASS export png 64164
+PASS voxel remesh at resolution 16
+PASS short turntable movie export
+PAGE_ERRORS []
+CONSOLE_ERRORS []
