@@ -1,3 +1,9 @@
+# V2.2.3 — Stone interface defaults
+
+Dark: charcoal / warm gray / sandstone. Light: limestone / taupe / dark stone text. Both the main interface and worker workspace use neutral defaults. Custom appearance values are retained; the exact previous factory blue appearance is migrated to stone. Interface Style reset and the header accent reset return to the new defaults. Scene background, paint, and model material colors are unchanged. V1 settings and the V2.2.2 backup remain separate.
+
+Palette browser checks cover fresh defaults, previous default migration, a custom saved palette, dark/light mode, reset and unchanged scene background. No sculpt math changes are included. Use Interface Style > Reset if you have a custom palette and want the stone defaults.
+
 # V2.2.1 — Brush strength response
 
 Fixed Alpha Stamp ignoring the main Strength slider. Strength now multiplies its capped/accumulating height, while Intensity still controls alpha coverage. The sculpt strength curve preserves a gentle low range and increases the upper deformation range; the standard and worker editors both use it. Grab/Drag remain anchored to pointer movement with a continuous bounded pull response, without a flat upper slider range. Worker smoothing/flattening gains are bounded for stability.

@@ -1,0 +1,3 @@
+PASS fresh stone defaults, theme toggle, preserved custom colors, reset and unchanged scene background
+PASS old-default stone defaults, theme toggle, preserved custom colors, reset and unchanged scene background
+PASS custom stone defaults, theme toggle, preserved custom colors, reset and unchanged scene background
