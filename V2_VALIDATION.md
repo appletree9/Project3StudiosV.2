@@ -1,7 +1,3 @@
-# V2.0.5 symmetry indicator checks
-
-Targeted browser tests cover X/Y/Z local-coordinate reflection, axis labels, immediate symmetry-off hiding, the brush-indicator checkbox, and the worker's projected Mirror X preview. The prior V2.0.4 broader test record follows below. Actual Safari/Apple Pencil/WebGPU hardware remains unverified.
-
 # V2.0.4 validation
 
 ## Environment
