@@ -1,3 +1,15 @@
+# V2.0.3 — Grab and smoother sculpting
+
+- Main brush list: **Grab · Sculpt** selects an actual deformation brush and automatically exits painting/object transforms.
+- Grab fixes a region at stroke start, follows a camera-facing plane, respects local transforms and mirror settings, continues outside the initial surface, and returns without cumulative drift. Applied in the main editor and worker workspace.
+- Main/worker brush paths use closer, evenly spaced dabs and interpolate pressure. Main input uses coalesced pointer samples and bounded per-frame batches. Normals/bounds update once per batch; per-vertex vector allocations and repeated position-array allocation are removed from the main deformation loop.
+- Switching from Paint or Move/Rotate/Scale to a sculpt brush no longer leaves those tools intercepting a sculpt gesture. Two-finger navigation flushes/records the pending stroke before switching gestures.
+- V1/V2 settings isolation is retained.
+
+Upload the extracted contents to **Project3StudiosV.2** only. Save your open project first, then reload V2 with **Ctrl+Shift+R** after deployment.
+
+See `V2_VALIDATION.md` for the browser and engine checks and their limits.
+
 # V2.0.2 — V2 app branding
 
 The app title, header, home caption, version label, diagnostics and export filenames now identify V2. The project JSON schema version remains 1 for compatibility. Independent V2 settings are preserved.
@@ -36,13 +48,13 @@ The performance workspace intentionally shows one mesh with its own clay rendere
 
 ## Boundaries and performance claims
 
-This is a runnable V2 implementation plus an engineering template, **not a certified production release or a verified 60/120 Hz lock**. Browser/iPad/Safari tests could not be run in this environment. Refresh rate, thermal throttling, mesh complexity and browser scheduling control the achievable rate.
+This is a runnable V2 implementation plus an engineering template, **not a certified production release or a verified 60/120 Hz lock**. Desktop Chromium browser tests passed using software WebGL2 at desktop and phone-sized viewport widths; iPad/Safari hardware tests have not been run. Refresh rate, thermal throttling, mesh complexity and browser scheduling control the achievable rate.
 
 The bundled build uses one Wasm worker and unshared linear memory. It works without cross-origin isolation. It isolates deformation and rendering from the main DOM thread; it does not eliminate the browser's JavaScript GC. No per-vertex JS objects are created in the hot loop. WebGPU command encoders, render passes, textures' current views and command buffers still involve browser-managed wrappers. Transfer/message handling and fallback timers can allocate. The implementation does not claim an entirely allocation-free JS loop.
 
 `GPUQueue.writeBuffer` and `bufferSubData` upload/copy bytes. They cannot alias GPU VRAM with arbitrary Wasm memory. The implementation avoids JSON mesh serialization and uses typed views into Wasm, but **does not provide literal zero-copy GPU uploads**.
 
-The BVH indexes vertices, with sphere queries and incremental bounds refitting. Expected local query cost is output-sensitive; worst case is linear, not a guaranteed O(log N). Picking chooses the nearest vertex near the view ray, not an exact triangle intersection. Sparse meshes can miss; dense sculpt meshes work best. Grab uses successive surface hits rather than a frozen stroke anchor.
+The BVH indexes vertices, with sphere queries and incremental bounds refitting. Expected local query cost is output-sensitive; worst case is linear, not a guaranteed O(log N). Picking chooses the nearest vertex near the view ray, not an exact triangle intersection. Sparse meshes can miss; dense sculpt meshes work best. Grab now uses a frozen stroke anchor and influence weights and continues pulling after the pointer leaves the original surface.
 
 Capacity is 300,000 vertices and 600,000 triangles. Positions/normals are uploaded in full after an edited input batch. Normal recomputation scans all triangles. These are known throughput limits; dirty-range uploads and adjacency-based normal updates are necessary before claiming high-density production performance. There is no automatic reduction of mesh resolution. Deformation may produce self-intersections; there is no topology/remesh guarantee.
 

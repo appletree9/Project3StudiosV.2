@@ -58,3 +58,10 @@ extern "C" API int dab(float x,float y,float z,float r,float a,int tool,float dx
 }
 void pickNode(int q,const float* o,const float* d,float tol){auto &v=nodes[q];float near=0,far=best;for(int k=0;k<3;k++){if(std::abs(d[k])<1e-8f){if(o[k]<v.lo[k]-tol||o[k]>v.hi[k]+tol)return;}else{float a=(v.lo[k]-tol-o[k])/d[k],b=(v.hi[k]+tol-o[k])/d[k];if(a>b)std::swap(a,b);near=std::max(near,a);far=std::min(far,b);if(near>far)return;}}if(v.left>=0){pickNode(v.left,o,d,tol);pickNode(v.right,o,d,tol);return;}for(int a=v.a;a<v.b;a++){int i=ids[a]*3;float x=p[i]-o[0],y=p[i+1]-o[1],z=p[i+2]-o[2],t=x*d[0]+y*d[1]+z*d[2];if(t<0||t>=best)continue;float u=x-t*d[0],w=y-t*d[1],v=z-t*d[2];if(u*u+w*w+v*v<=tol*tol){best=t;bx=p[i];by=p[i+1];bz=p[i+2];}}}
 extern "C" {API int pick(float ox,float oy,float oz,float dx,float dy,float dz,float tolerance){float o[3]={ox,oy,oz},d[3]={dx,dy,dz};best=1e30f;pickNode(0,o,d,tolerance);return best<1e30f;}API float hitx(){return bx;}API float hity(){return by;}API float hitz(){return bz;}}
+// Grab uses frozen stroke weights and checkpoint positions, so it follows the
+// cursor even after leaving the original surface and does not accumulate drift.
+static float grabWeights[CAP],grabFactors[CAP];static int grabMirror=0;static float grabCenterX=0;
+extern "C" {
+API void grab_begin(float x,float y,float z,float r,int mirror){grabMirror=mirror;grabCenterX=x;for(int i=0;i<count;i++){int k=i*3;float dx=undoP[k]-x,dy=undoP[k+1]-y,dz=undoP[k+2]-z;float d=std::sqrt(dx*dx+dy*dy+dz*dz),f=std::max(0.f,1-d/r),w1=f*f,w2=0;if(mirror&&std::abs(x)>.0001f){dx=undoP[k]+x;d=std::sqrt(dx*dx+dy*dy+dz*dz);f=std::max(0.f,1-d/r);w2=f*f;}grabWeights[i]=std::max(w1,w2);grabFactors[i]=w2?(w1-w2)/(w1+w2):1;}}
+API void grab_update(float dx,float dy,float dz,float amount){for(int i=0;i<count;i++){int k=i*3;float w=grabWeights[i]*amount,mx=dx*grabFactors[i];p[k]=undoP[k]+mx*w;p[k+1]=undoP[k+1]+dy*w;p[k+2]=undoP[k+2]+dz*w;}for(int q=used-1;q>=0;q--)refit(q);}
+}
