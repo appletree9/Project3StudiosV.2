@@ -1,0 +1,27 @@
+PICK {'x': 194.99999999999997, 'y': 486.06096802761175} 
+PASS main Drag: deformation, off-surface continuation, return without drift, undo; transform deselection
+PASS brush inflate 0.012147
+PASS brush carve 0.01215
+PASS brush clay 0.012129
+PASS brush smooth 0.000637
+PASS brush flatten 0.001786
+PASS brush pinch 0.003878
+PASS brush grab 0.036012
+PASS brush crease 0.006713
+PASS brush scrape 0.00379
+PASS brush polish 0.000101
+WORKER WebGL2 / VAO · 6,050 vertices · Ready
+PASS worker Drag + apply 0.3773584663867951
+PASS scene snapshot/restore
+SHAPES [{"name": "Sphere", "vertices": 6050}, {"name": "Cube", "vertices": 7778}, {"name": "Cylinder", "vertices": 3938}, {"name": "Cone", "vertices": 4802}, {"name": "Torus", "vertices": 6144}, {"name": "Capsule", "vertices": 5122}, {"name": "Plane", "vertices": 13442}, {"name": "Knot", "vertices": 8192}, {"name": "Icosa", "vertices": 362}, {"name": "Anatomical Head", "vertices": 69269}, {"name": "Body", "vertices": 6210}, {"name": "Torso", "vertices": 6210}, {"name": "Female Body", "vertices": 54582}, {"name": "Male Body", "vertices": 54582}, {"name": "Human Head", "vertices": 69269}, {"name": "Female Head", "vertices": 69318}, {"name": "Male Head", "vertices": 69269}, {"name": "Egg", "vertices": 5042}, {"name": "Pyramid", "vertices": 1026}, {"name": "Prism", "vertices": 1538}, {"name": "Octahedron", "vertices": 1026}, {"name": "Dodecahedron", "vertices": 4610}, {"name": "Rounded Cube", "vertices": 9602}]
+PASS duplicate/remove, theme, background, material/Matcap, projection, snapping, five light types, adjacency refresh after topology change
+PAINT_STATE {'tool': 'polish', 'transformTool': 'none', 'stroke': False, 'paintActive': True, 'objects': 1} {'x': 310.34964031002886, 'y': 486.06096802761175} {'hit': {'object': 'Sphere 1', 'selected': True}, 'element': ''}
+PROJECT_DOWNLOAD QA Sculpt.p3sculpt
+PASS malformed project rejected without changing the scene
+PASS painting, OBJ export, native project save/reopen, basic rig create/close
+PASS export stl 604884
+PASS export png 58762
+PASS voxel remesh at resolution 16
+PASS short turntable movie export
+PAGE_ERRORS []
+CONSOLE_ERRORS []

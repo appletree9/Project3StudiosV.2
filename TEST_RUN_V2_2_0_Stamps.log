@@ -1,0 +1,6 @@
+PASS reusable engine: spacing, segmentation, dot, static, coalesced, pointer ownership, cancellation, 2D capped/accumulating alpha
+PASS 3D Alpha Stamp deformation and undo 0.011040329933166504
+PASS 3D dot has one imprint
+PASS 3D accumulation differs from capped layer 0.011040329933166504 0.1790834665298462
+PASS mirrored stamp layer 15
+PAGE_ERRORS []

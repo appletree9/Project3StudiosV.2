@@ -1,3 +1,11 @@
+# V2.1.0 runtime resilience
+
+All Three.js 0.160.1 runtime modules are vendored under `vendor/three/`, with the upstream MIT license. The import map and service-worker precache use local paths. Core startup and GLB export no longer need a public CDN. Serve the complete folder over HTTP(S).
+
+The standard editor supports WebGL1 or WebGL2 through Three.js. The optional worker workspace requires additional browser capabilities and is disabled when Worker or OffscreenCanvas is missing. Failed startup times out after 20 seconds and preserves the standard scene; no worker edits are applied until Apply. The worker stops after graphics failure, and the user can return to the editor. Main graphics loss pauses rendering and offers project saving; graphics restoration reuploads editable geometry.
+
+Snapshot state includes selection, transform checks, reset baseline and cloned rig metadata. Main input interruption clears active strokes and gestures. The standard renderer uses conservative initial resolution and device-sensitive antialiasing, retaining adaptive quality and idle/background pause behavior.
+
 # V2 architecture and optimization notes
 
 ```mermaid

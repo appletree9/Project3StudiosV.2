@@ -1,0 +1,9 @@
+START touch []
+PASS touch local-only startup and interactions
+START webgl1 []
+PASS webgl1 local-only startup and interactions
+START no-worker []
+PASS no-worker local-only startup and interactions
+START worker-failure []
+PASS worker-failure local-only startup and interactions
+PASS no WebGL: actionable recovery

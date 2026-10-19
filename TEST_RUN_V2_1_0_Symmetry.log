@@ -1,0 +1,3 @@
+PASS main: X/Y/Z mirror alignment, axis label, symmetry off, indicator toggle
+PASS worker: mirror outline, label, projection, orbit refresh, symmetry off
+PAGE_ERRORS [] CONSOLE_ERRORS []

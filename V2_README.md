@@ -1,3 +1,21 @@
+# V2.2.0 — Alpha Stamp brush
+
+Added a separate Alpha Stamp sculpt brush with a cached radial alpha texture, distance-based spacing, pressure interpolation, Dot/Drag strokes, per-stroke capped height or accumulating volume, symmetry and undo. Existing sculpt brushes remain available. Choose Alpha Stamp in Sculpt and adjust its dedicated settings in the right panel. The optional performance worker retains its existing eleven brushes.
+
+The reusable module also renders to 2D canvases. See `STAMP_ENGINE.md` for API hooks, settings, math and limitations. Tests cover the new brush on desktop/phone viewports plus reusable 2D capped/accumulating behavior; general app regressions and simulated touch/browser fallbacks are checked separately. Physical device limitations documented below still apply.
+
+Upload the complete extracted package, including `engine/stamps.js`, `vendor/` and all other files, to V2. V1 code/settings remain separate.
+
+# Project3Studios V2.1.0 — Stability update
+
+Upload the **entire extracted ZIP contents**, including `vendor/` and `engine/`, to your V2 repository. Refresh after deployment. V1 code and settings remain separate.
+
+This update bundles Three.js and its import/export modules locally, removing the CDN dependency for startup and GLB export. It adds clear startup failures, graphics-context recovery, worker startup timeouts and failure cleanup, and standard-editor fallback when offscreen workers are unavailable. Lower initial pixel density and antialiasing settings reduce GPU load on touch and low-memory devices.
+
+Undo restores the selected object, checked transform selections, original reset geometry and independent rig metadata. Imports now record their final geometry and reset baseline; oversized files are rejected before parsing. Interrupted input is ended on tab changes or lost focus. Editor shortcuts no longer modify the main scene while the performance workspace is open. Older browsers without ResizeObserver retain resize support.
+
+All eleven brushes and symmetry indicators remain available. See `V2_VALIDATION.md` for checks and device limitations. This is a source/deployment package, not an installed update to your live GitHub site.
+
 # V2.0.5 — Symmetry brush indicator
 
 When Sculpt symmetry is on, a gold brush outline shows the mirrored brush position across the selected object's X, Y or Z axis. The brush readout adds **Mirror X/Y/Z**. It follows the brush radius, hides when symmetry/brush indicators are disabled, and is excluded from PNG exports.

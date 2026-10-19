@@ -1,3 +1,21 @@
+# V2.2.0 — Alpha Stamp brush
+
+Added a separate Alpha Stamp sculpt brush with a cached radial alpha texture, distance-based spacing, pressure interpolation, Dot/Drag strokes, per-stroke capped height or accumulating volume, symmetry and undo. Existing sculpt brushes remain available. Choose Alpha Stamp in Sculpt and adjust its dedicated settings in the right panel. The optional performance worker retains its existing eleven brushes.
+
+The reusable module also renders to 2D canvases. See `STAMP_ENGINE.md` for API hooks, settings, math and limitations. Tests cover the new brush on desktop/phone viewports plus reusable 2D capped/accumulating behavior; general app regressions and simulated touch/browser fallbacks are checked separately. Physical device limitations documented below still apply.
+
+Upload the complete extracted package, including `engine/stamps.js`, `vendor/` and all other files, to V2. V1 code/settings remain separate.
+
+# V2.1.0 validation
+
+Tested in Chromium 134 with software graphics. Desktop regression covers eleven brushes, worker deformation/apply, 23 shapes, undo, scene edits, painting, native save/reopen, malformed-project rejection, rig creation, GLB/STL/OBJ/PNG export, voxel remesh and video export. Test-only hooks are injected by the local test server, never shipped in app code.
+
+Additional tests cover phone viewport, actual browser-emulated touch events, forced WebGL1, simulated context loss/restoration with scene preservation, missing Worker/ResizeObserver, failed worker construction, and absent WebGL. Startup is tested with external HTTPS requests blocked. WebAssembly brush/BVH/undo tests, worker protocol and V1/V2 isolation checks also run.
+
+Physical iOS/Safari, Android hardware, Apple Pencil pressure/tilt and native WebGPU are not verified. Compatibility requires WebGL, ES modules and a modern browser; the optional performance workspace requires Wasm SIMD, Worker and OffscreenCanvas plus WebGL2 or WebGPU. Unsupported graphics devices receive an explanation rather than a usable 3D viewport. No universal device or fixed frame-rate guarantee is made.
+
+Current logs: `TEST_RUN_V2_1_0*.log`. Earlier records below describe earlier builds.
+
 # V2.0.5 symmetry indicator checks
 
 Targeted browser tests cover X/Y/Z local-coordinate reflection, axis labels, immediate symmetry-off hiding, the brush-indicator checkbox, and the worker's projected Mirror X preview. The prior V2.0.4 broader test record follows below. Actual Safari/Apple Pencil/WebGPU hardware remains unverified.
