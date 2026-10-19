@@ -1,0 +1,36 @@
+VERSION 6 REGRESSION CHECKS
+PASS: All inline scripts and anatomy asset script parse.
+PASS: Actual placement function tested against decoded anatomical bounds: the
+      first head and all subsequent tested bodies/heads do not overlap the sphere.
+PASS: Portrait camera target follows the selected new model.
+PASS: All head preset aliases route to detailed geometry.
+PASS: Actual service-worker code tested in a simulated cache/network environment:
+      install bypasses old HTTP cache, navigation prefers fresh HTML, offline
+      fallback works, old app caches are removed and unrelated caches retained.
+NOTE: Version 6 has code-level regression checks; full local browser navigation
+      was unavailable. The earlier detailed anatomy edition passed browser tests
+      below. The published site was inspected and its detailed female head had
+      69,318 vertices and 138,616 triangles, matching the bundled asset.
+
+TEST RESULTS - DETAILED ANATOMY EDITION - 18 October 2026
+
+PASS: Full application startup in Chrome/WebGL without runtime script errors.
+PASS: All 23 shape types create filled, opaque geometry.
+PASS: Female/male body and head surfaces have every edge shared by exactly two
+      oppositely oriented triangles; finite positions; positive enclosed volume.
+      Each object has five closed components: skin surface and eye substructures.
+PASS: Detailed head sculpting changes vertices; all coordinates remain finite.
+PASS: Undo/redo retains actual positions and triangle indices, paint attributes,
+      and rotation rather than rebuilding topology from a preset name.
+PASS: Detailed models save and reopen with expected object count/editable data.
+PASS: Symmetry panel mouse and browser-emulated touch dragging, settings/position
+      persistence, viewport clamping, minimize, restore, Reset Home.
+PASS: 24 material shades and 12 light-mode shades plus custom picker.
+PASS: PWA service worker installs v5 cache including anatomy-assets.js.
+PASS: Visual inspection of rendered adult bodies and standalone heads.
+PASS: Original icons and manifest bytes preserved, original files all retained.
+PASS: ZIP integrity, root-level deployment files, no test hooks in app.
+
+Limits: No physical iPhone test or exhaustive test of every pre-existing tool,
+import/export format, or hosting deployment. Anatomy models are external surfaces
+for art/sculpting, not a medical reference, internal-organ system, or posed rig.

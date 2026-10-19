@@ -1,0 +1,29 @@
+ANATOMICAL MODEL ASSETS
+
+Source: MakeHuman Community core graphical assets (base mesh hm08, adult
+male/female macrodetail targets, muscle-definition targets, and high-poly eyes).
+https://github.com/makehumancommunity/makehuman
+Source tree: a8bc2d54ff0ac92e78ff71431b1023eda42bf482
+Asset license: CC0 1.0 Universal. See LICENSE_ANATOMY_CC0.txt.
+https://static.makehumancommunity.org/about/license.html
+
+Original asset notices identify the MakeHuman team, Data Collection AB,
+Joel Palmius, Jonas Hauquier and original target author Manuel Bastioni.
+Only graphical model/target data was used. MakeHuman program source code
+was not copied into this app.
+
+Preparation: adult male/female targets blended across the three bundled
+ancestry variations; muscle/torso tone targets applied; helper/cage geometry
+removed; Catmull-Clark subdivision; standalone heads cropped and capped at
+the neck; eye proxy mapped to each adult; eye rear boundaries closed;
+coordinates normalized to this editor; packed as positions and triangle indices.
+
+Both bodies contain separated fingers and toes with authored hand/foot forms.
+Heads contain modeled ears, eyelids, eye geometry, nose/nostrils, lips and jaw.
+These are external-surface human anatomy meshes for sculpting. They do not
+contain internal organs, an anatomical skeleton, or a rig with posed fingers.
+The eye parts remain separate closed surfaces within the same editable object.
+
+anatomy-assets.js is bundled locally and cached by the PWA. Model assets do
+not require a model-hosting service at runtime. The app's existing Three.js
+CDN dependency remains.
