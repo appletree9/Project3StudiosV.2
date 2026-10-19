@@ -1,3 +1,11 @@
+# V2.2.1 — Brush strength response
+
+Fixed Alpha Stamp ignoring the main Strength slider. Strength now multiplies its capped/accumulating height, while Intensity still controls alpha coverage. The sculpt strength curve preserves a gentle low range and increases the upper deformation range; the standard and worker editors both use it. Grab/Drag remain anchored to pointer movement with a continuous bounded pull response, without a flat upper slider range. Worker smoothing/flattening gains are bounded for stability.
+
+The main Strength slider now supports zero, half-percent increments and a percentage readout; the performance workspace also shows its percentage. Stamp and anchored Drag freeze strength at stroke start, so changed settings apply to the next stroke.
+
+Validation compares identical strokes at 0%, 10% and 100% across all twelve standard brushes, plus worker low/high strength. Alpha Stamp cap, accumulation, dot, symmetry and undo regression checks remain included. Physical Safari/Pencil hardware remains unverified.
+
 # V2.2.0 — Alpha Stamp brush
 
 Added a separate Alpha Stamp sculpt brush with a cached radial alpha texture, distance-based spacing, pressure interpolation, Dot/Drag strokes, per-stroke capped height or accumulating volume, symmetry and undo. Existing sculpt brushes remain available. Choose Alpha Stamp in Sculpt and adjust its dedicated settings in the right panel. The optional performance worker retains its existing eleven brushes.

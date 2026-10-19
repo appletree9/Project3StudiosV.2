@@ -1,3 +1,5 @@
+V2.2.1: Main Strength now controls stamp height too. Intensity multiplies the cached alpha coverage; both are frozen for each stroke. Strength 0 leaves geometry unchanged.
+
 # V2.2.0 Alpha Stamp
 
 Choose **Sculpt → Alpha Stamp**. Its settings are in **Alpha Stamp Brush** in the right panel. Existing Grab/Drag tools and the performance worker retain their original behavior. The new brush currently runs in the standard editor.

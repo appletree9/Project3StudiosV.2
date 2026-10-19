@@ -1,3 +1,5 @@
+V2.2.1: Updated strength controls. Upload all extracted files to V2 and refresh.
+
 V2.2.0: Read STAMP_ENGINE.md for the new Alpha Stamp brush. Upload ALL extracted files/folders to V2.
 
 V2.1.0: Upload ALL extracted files and folders, including vendor/ and engine/, to the V2 site. Keep V1 separate. Serve over HTTPS; double-clicking index.html is unsupported. Read V2_README.md for changes and V2_VALIDATION.md for tested platforms.
