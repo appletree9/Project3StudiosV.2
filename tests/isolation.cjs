@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8'),sw=fs.readFileSync('sw.js','utf8');
+const source=html.match(/<script id="p3-v2-storage-isolation">([\s\S]*?)<\/script>/)[1];
+const map=new Map([['p3sculpt-theme','light'],['p3-interface-appearance','v1-color'],['p3sculpt-interface-layout','v1-layout']]);
+const storage={getItem:k=>map.has(k)?map.get(k):null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k)};
+const ctx={window:{localStorage:storage}};vm.createContext(ctx);vm.runInContext(source,ctx);const v2=ctx.window.P3V2Storage;
+assert.equal(v2.getItem('p3sculpt-theme'),null);v2.setItem('p3sculpt-theme','dark');v2.setItem('p3-interface-appearance','v2-color');v2.setItem('p3sculpt-interface-layout','v2-layout');
+assert.equal(map.get('p3sculpt-theme'),'light');assert.equal(map.get('p3-interface-appearance'),'v1-color');assert.equal(map.get('p3sculpt-interface-layout'),'v1-layout');
+storage.setItem('p3-interface-appearance','v1-new-color');assert.equal(v2.getItem('p3-interface-appearance'),'v2-color');v2.removeItem('p3sculpt-interface-layout');assert.equal(map.get('p3sculpt-interface-layout'),'v1-layout');
+assert(!html.replace(/<script id="p3-v2-storage-isolation">[\s\S]*?<\/script>/,'').includes('localStorage.'));
+const callbacks={};const deleted=[];const prefix='project3studios-v2:https://example.test/v2/:';const cacheNames=['p3sculpt-v1','p3sculpt-v2-worker-2.0.0',prefix+'old','project3studios-v2:https://example.test/other/:old'];
+vm.runInNewContext(sw,{self:{registration:{scope:'https://example.test/v2/'},addEventListener:(k,f)=>callbacks[k]=f,clients:{claim:async()=>{}},location:{origin:'https://example.test'}},caches:{keys:async()=>cacheNames,delete:async k=>deleted.push(k)}});
+(async()=>{let pending;callbacks.activate({waitUntil:p=>pending=p});await pending;assert.deepEqual(deleted,[prefix+'old']);assert(!sw.includes('caches.match('));console.log('PASS: V1/V2 theme, color, layout storage independence; V1 data preserved; scope-only cache deletion/read');})();

@@ -1,3 +1,13 @@
+# V2.0.2 — V2 app branding
+
+The app title, header, home caption, version label, diagnostics and export filenames now identify V2. The project JSON schema version remains 1 for compatibility. Independent V2 settings are preserved.
+
+# V2.0.1 — Separate settings from V1
+
+V2 now has its own browser storage namespace for every persisted setting, including layout, light/dark theme, panel/accent colors, background, swatches, shortcuts, symmetry and quality options. It never imports old shared settings. First launch starts with V2 defaults; previously shared preferences are not carried over. V1 data is left intact.
+
+V2 also uses separate, scope-specific offline caches and reads/deletes only its own cache versions. Keep V1 and V2 in separate repository URLs. Upload this package to **Project3StudiosV.2** only. Save any open work first, then reload V2 after deployment (Ctrl+Shift+R on desktop). Existing V1 code is untouched.
+
 # Project3Studios V2 Sculpt
 
 Built from `Project3Studios_SEPARATE_STYLE_MENU.zip`. The original editor, assets, separate style menu, materials, scene saving and other tools remain in this package. Historical 1.0.1 feature/test files describe the supplied editor, not validation of this V2 engine.
