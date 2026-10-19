@@ -1,3 +1,11 @@
+# V2.0.5 — Symmetry brush indicator
+
+When Sculpt symmetry is on, a gold brush outline shows the mirrored brush position across the selected object's X, Y or Z axis. The brush readout adds **Mirror X/Y/Z**. It follows the brush radius, hides when symmetry/brush indicators are disabled, and is excluded from PNG exports.
+
+The performance workspace has a matching gold **Mirror X** outline. Its position is projected from the actual mirrored mesh point, so orbiting the view updates its location. During Drag, the mirror follows the stroke plane beyond the original surface. The label reports Mirror X when enabled.
+
+Upload the extracted contents to **Project3StudiosV.2** and refresh after deployment. V1 settings remain separate.
+
 # Project3Studios V2.0.4 Sculpt
 
 This update restores the earlier **Grab** behavior and adds **Drag as a separate brush**, plus Crease, Scrape and Polish. It retains independent V2 settings and the optional Wasm performance workspace.
