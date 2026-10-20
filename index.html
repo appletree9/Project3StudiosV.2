@@ -1844,4 +1844,17 @@ body.light-mode #p3BuildLabel{color:#786754!important}
 #top #logoButton,#top #logoButton:hover,#top #logoButton:active{background:transparent!important;background-image:none!important;border:0!important;box-shadow:none!important;filter:none!important}
 #top #logoButton:focus-visible{outline:2px solid var(--studio-accent,#b8aa97);outline-offset:3px}
 </style>
+<style id="p3-debugger-stone-colors">
+/* Debugger-only colors; diagnostics and event handling are unchanged. */
+body #p3debug,body #p3debug-launch{--debug-surface:#373632;--debug-header:#46433e;--debug-field:#2b2926;--debug-text:#eee9e0;--debug-muted:#c7bfb2;--debug-border:#80776a;--debug-accent:#d2c3ae;background:var(--debug-surface)!important;color:var(--debug-text)!important;border-color:var(--debug-border)!important;color-scheme:dark}
+body.light-mode #p3debug,body.light-mode #p3debug-launch{--debug-surface:#e7e1d7;--debug-header:#d8cfc1;--debug-field:#f2eee7;--debug-text:#36322d;--debug-muted:#5e5549;--debug-border:#b6ab9a;--debug-accent:#6a5742;color-scheme:light}
+body #p3debug header{background:var(--debug-header)!important;color:var(--debug-text)!important;border-color:var(--debug-border)!important}
+body #p3debug pre,body #p3debug input,body #p3debug select,body #p3debug textarea{background:var(--debug-field)!important;color:var(--debug-text)!important;border-color:var(--debug-border)!important}
+body #p3debug label,body #p3debug p,body #p3debug .tiny{color:var(--debug-muted)!important}
+body #p3debug #p3debug-status{color:var(--debug-accent)!important}
+body #p3debug button{background:var(--debug-header)!important;color:var(--debug-text)!important;border-color:var(--debug-border)!important}
+body #p3debug button:hover,body #p3debug-launch:hover{background:var(--debug-field)!important}
+body #p3debug input::placeholder{color:var(--debug-muted)!important;opacity:1}
+body #p3debug button:focus-visible,body #p3debug input:focus-visible,body #p3debug select:focus-visible,body #p3debug-launch:focus-visible{outline:2px solid var(--debug-accent);outline-offset:2px}
+</style>
 </body></html>

@@ -1,3 +1,5 @@
+Debugger color update (still 2.2.3): debugger panel, header, fields, logs and launcher use charcoal/sandstone in dark mode and limestone/taupe in light mode. Diagnostic behavior is unchanged.
+
 Home-page notice update (still 2.2.3): reserves rights in Project3Studios-owned, copyrightable material; addresses copying and redistribution; preserves applicable law, prior grants, third-party licenses and user-created content. A notice does not establish ownership or copyright eligibility by itself.
 
 Logo appearance update (still 2.2.3): removed the top logo button background and border in dark/light mode. The logo remains clickable and has a keyboard focus outline.
