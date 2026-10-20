@@ -1,3 +1,5 @@
+Home-page notice update (still 2.2.3): reserves rights in Project3Studios-owned, copyrightable material; addresses copying and redistribution; preserves applicable law, prior grants, third-party licenses and user-created content. A notice does not establish ownership or copyright eligibility by itself.
+
 Logo appearance update (still 2.2.3): removed the top logo button background and border in dark/light mode. The logo remains clickable and has a keyboard focus outline.
 
 # V2.2.3 — Stone interface defaults
